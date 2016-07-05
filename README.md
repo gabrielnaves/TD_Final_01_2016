@@ -3,6 +3,8 @@
 -> Gabriel Naves da Silva - 12/0011867 <br />
 -> Ícaro da Costa Mota - 12/0051389
 
+O código foi baseado no tutorial do site **Programming Logic**: http://www.programminglogic.com/sockets-programming-in-c-using-udp-datagrams/
+
 # Instrucoes de compilacao:
 
 ### Opcao 1
