@@ -20,9 +20,7 @@ Para executar o codigo utilize o seguinte comando:
 Alternativamente, o codigo pode ser compilado utilizando os comandos a seguir:
 
 ```
-mkdir build
-cd build
-cmake ..
+cmake .
 make
 ```
 
