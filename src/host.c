@@ -4,9 +4,7 @@ int runHost(const char* port) {
     printf("Host is running.\n");
     host_initData();
     host_handshake();
-    printf("Host-server communication started.\n");
-    while (true)
-        host_sendAndReceiveMessage();
+    host_gossip();
     return 0;
 }
 
@@ -36,16 +34,25 @@ void host_handshake() {
     } while (strcmp(buffer, "HELLO CLT") != 0);
 }
 
-void host_sendAndReceiveMessage() {
+void host_gossip() {
+    printf("Host-server communication started.\n");
     char buffer[BUFFER_SIZE];
+    do {
+        host_sendAndReceiveMessage(buffer, BUFFER_SIZE);
+    } while (strcmp(buffer, "BYE CLT") != 0);
+    sendto(hst_data.clientSocket, "BYE SRV", 8, 0,
+           (struct sockaddr *)&hst_data.serverAddr, hst_data.addr_size);
+}
+
+void host_sendAndReceiveMessage(char* buffer, int size) {
     printf("Type a message to send to server: ");
-    readLine(buffer, BUFFER_SIZE);
+    readLine(buffer, size);
 
     // Sends message to server
     sendto(hst_data.clientSocket, buffer, strlen(buffer)+1, 0,
            (struct sockaddr *)&hst_data.serverAddr, hst_data.addr_size);
 
     // Receives message from server
-    recvfrom(hst_data.clientSocket, buffer, BUFFER_SIZE, 0, NULL, NULL);
+    recvfrom(hst_data.clientSocket, buffer, size, 0, NULL, NULL);
     printf("Received message from server: %s\n", buffer);
 }

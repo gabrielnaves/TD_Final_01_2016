@@ -13,6 +13,7 @@ struct HostData {
 int runHost(const char* port);
 void host_initData();
 void host_handshake();
-void host_sendAndReceiveMessage();
+void host_gossip();
+void host_sendAndReceiveMessage(char* buffer, int size);
 
 #endif /* HOST_H */

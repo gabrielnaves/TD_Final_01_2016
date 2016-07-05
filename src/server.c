@@ -4,9 +4,7 @@ int runServer(const char* port) {
     printf("Server is running.\n");
     server_initData();
     server_waitForHandshake();
-    printf("Server-host communication started.\n");
-    while(true)
-        server_sendAndReceiveMessage();
+    server_gossip();
     return 0;
 }
 
@@ -40,17 +38,24 @@ void server_waitForHandshake() {
            (struct sockaddr*)&srv_data.server_storage, srv_data.address_size);
 }
 
-void server_sendAndReceiveMessage() {
+void server_gossip() {
+    printf("Server-host communication started.\n");
     char buffer[BUFFER_SIZE];
+    do {
+        server_sendAndReceiveMessage(buffer, BUFFER_SIZE);
+    } while(strcmp(buffer, "BYE SRV") != 0);
+}
+
+void server_sendAndReceiveMessage(char* buffer, int size) {
     printf("Type a message to send to host: ");
-    readLine(buffer, BUFFER_SIZE);
+    readLine(buffer, size);
 
     // Sends message to host
     sendto(srv_data.udp_socket, buffer, strlen(buffer)+1, 0,
            (struct sockaddr *)&srv_data.server_storage, srv_data.address_size);
 
     // Receives message from host
-    recvfrom(srv_data.udp_socket, buffer, BUFFER_SIZE, 0,
+    recvfrom(srv_data.udp_socket, buffer, size, 0,
              (struct sockaddr *)&srv_data.server_storage, &srv_data.address_size);
 
     printf("Received message from host: %s\n", buffer);
