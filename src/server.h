@@ -11,6 +11,8 @@ struct ServerData {
     socklen_t address_size;
 } srv_data;
 
-int RunServer(const char* port);
+int runServer(const char* port);
+void server_initData();
+void server_waitForHandshake();
 
 #endif /* SERVER_H */

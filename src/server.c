@@ -2,9 +2,28 @@
 
 int runServer(const char* port) {
     printf("Server is running.\n");
+    server_initData();
+    server_waitForHandshake();
+    printf("Server-host communication started.\n");
+    // while(true) {
+    //     char buffer[BUFFER_SIZE];
+    //     /* Try to receive any incoming UDP datagram. Address and port of
+    //        requesting client will be stored on srv_data.server_storage variable */
+    //     int byte_amount = recvfrom(srv_data.udp_socket,buffer,BUFFER_SIZE,0,
+    //                                (struct sockaddr *)&srv_data.server_storage, &srv_data.address_size);
 
-    char buffer[BUFFER_SIZE];
+    //     printf("Received this string: %s\n", buffer);
 
+    //     /* Send uppercase message back to client, using srv_data.server_storage as the address */
+    //     sendto(srv_data.udp_socket,buffer,byte_amount,0,
+    //            (struct sockaddr *)&srv_data.server_storage,srv_data.address_size);
+    //     printf("Will this pass?\n");
+    // }
+
+    return 0;
+}
+
+void server_initData() {
     /* Create UDP socket */
     srv_data.udp_socket = socket(PF_INET, SOCK_DGRAM, 0);
 
@@ -19,20 +38,16 @@ int runServer(const char* port) {
 
     /* Initialize size variable to be used later on */
     srv_data.address_size = sizeof srv_data.server_storage;
+}
 
-    while(true) {
+void server_waitForHandshake() {
+    char buffer[BUFFER_SIZE];
+    printf("Server is waiting for handshake from client.\n");
+    while (strcmp(buffer, "HELLO SRV") != 0) {
         /* Try to receive any incoming UDP datagram. Address and port of
            requesting client will be stored on srv_data.server_storage variable */
         int byte_amount = recvfrom(srv_data.udp_socket,buffer,BUFFER_SIZE,0,
                                    (struct sockaddr *)&srv_data.server_storage, &srv_data.address_size);
-
-        printf("Received this string: %s\n", buffer);
-
-        /* Send uppercase message back to client, using srv_data.server_storage as the address */
-        sendto(srv_data.udp_socket,buffer,byte_amount,0,
-               (struct sockaddr *)&srv_data.server_storage,srv_data.address_size);
-        printf("Will this pass?\n");
     }
-
-    return 0;
+    sendto(srv_data.udp_socket,"HELLO CLT", 10, 0, (struct sockaddr*)&srv_data.server_storage,srv_data.address_size);
 }
