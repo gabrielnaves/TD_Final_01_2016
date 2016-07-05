@@ -1,0 +1,31 @@
+# Integrantes:
+
+-> Gabriel Naves da Silva - 12/0011867
+-> Ícaro da Costa Mota - 12/0051389
+
+# Instrucoes de compilacao:
+
+### Opcao 1
+
+Para compilar o codigo utilize o seguinte comando:
+
+` sh build.sh `
+
+Para executar o codigo utilize o seguinte comando:
+
+` ./build/gossip [modo] [porta] `
+
+### Opcao 2
+
+Alternativamente, o codigo pode ser compilado utilizando os comandos a seguir:
+
+```
+mkdir build
+cd build
+cmake ..
+make
+```
+
+Dessa forma, o codigo podera ser executado utilizando o seguinte comando:
+
+` ./gossip [modo] [porta] `
