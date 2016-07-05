@@ -14,5 +14,6 @@ struct ServerData {
 int runServer(const char* port);
 void server_initData();
 void server_waitForHandshake();
+void server_sendAndReceiveMessage();
 
 #endif /* SERVER_H */

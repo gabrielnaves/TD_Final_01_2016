@@ -5,12 +5,14 @@
 #include <utils.h>
 
 struct HostData {
-    int udp_socket;
-    struct sockaddr_in server_address;
-    struct sockaddr_storage server_storage;
-    socklen_t address_size;
+    int clientSocket;
+    socklen_t addr_size;
+    struct sockaddr_in serverAddr;
 } hst_data;
 
 int runHost(const char* port);
+void host_initData();
+void host_handshake();
+void host_sendAndReceiveMessage();
 
 #endif /* HOST_H */
