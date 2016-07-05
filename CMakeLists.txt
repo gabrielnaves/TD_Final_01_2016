@@ -4,5 +4,5 @@ project(Gossip)
 file(GLOB_RECURSE sources src/*.c)
 
 add_executable(gossip ${sources})
-target_compile_options(gossip PUBLIC -ansi -Wall)
+target_compile_options(gossip PUBLIC -ansi -Wall -std=c99)
 target_include_directories(gossip PUBLIC src)

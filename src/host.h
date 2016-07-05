@@ -2,11 +2,8 @@
 #define HOST_H
 
 #include <include_all_std.h>
+#include <utils.h>
 
-int RunHost(const char* port) {
-    printf("Host is running.\n");
-
-    return 0;
-}
+int runHost(const char* port);
 
 #endif /* HOST_H */

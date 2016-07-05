@@ -2,11 +2,15 @@
 #define SERVER_H
 
 #include <include_all_std.h>
+#include <utils.h>
 
-int RunServer(const char* port) {
-    printf("Server is running.\n");
+struct ServerData {
+    int udp_socket;
+    struct sockaddr_in server_address;
+    struct sockaddr_storage server_storage;
+    socklen_t address_size;
+} srv_data;
 
-    return 0;
-}
+int RunServer(const char* port);
 
 #endif /* SERVER_H */

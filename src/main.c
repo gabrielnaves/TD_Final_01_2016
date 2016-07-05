@@ -10,9 +10,9 @@ int main(int argc, char *argv[]) {
         exit(1);
     const char *port = argc == 3 ? argv[2] : "10101";
     if (strcmp(argv[1], "-S") == 0)
-        return RunServer(port);
+        return runServer(port);
     if (strcmp(argv[1], "host") == 0)
-        return RunHost(port);
+        return runHost(port);
     return 0;
 }
 
