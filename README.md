@@ -1,6 +1,6 @@
 # Integrantes:
 
--> Gabriel Naves da Silva - 12/0011867
+-> Gabriel Naves da Silva - 12/0011867 <br />
 -> Ícaro da Costa Mota - 12/0051389
 
 # Instrucoes de compilacao:
